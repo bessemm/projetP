@@ -24,9 +24,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type")
-public class Utilisateur {
+@Inheritance(strategy = InheritanceType.JOINED)
+ public class Utilisateur {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 
@@ -43,7 +42,7 @@ public class Utilisateur {
     private String adresse;
     @Column(nullable=false)
     private  String role;
-     @OneToMany(fetch = FetchType.EAGER)
+     @OneToMany()
     private List<Annonce> annonces=new ArrayList<>();
     @Override
     public String toString() {
@@ -58,5 +57,7 @@ public class Utilisateur {
 
 
     private boolean etat;
+    @OneToMany(mappedBy = "utilisateur")
+    List<Notification> notifications=new ArrayList<Notification>() ;
     
 }

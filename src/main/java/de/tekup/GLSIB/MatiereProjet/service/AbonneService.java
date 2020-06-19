@@ -8,5 +8,8 @@ public interface AbonneService {
     public Utilisateur inscription(String username,String password,String confirmedPassword,String firstName, String lastName,String email);
     public Utilisateur loadUserByUsername(String username);
 	public boolean desactiver(String username);
-	public Abonne loadAbonneByUsername(String name);
+ 	public Abonne findByid(Long id);
+	public Abonne findByUsername(String id);
+	public Utilisateur findAbonneByUsername(String s);
+	public Integer findNbAbonnee(String username);
 }

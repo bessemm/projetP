@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +21,8 @@ import javax.persistence.OneToMany;
 @NoArgsConstructor
 public class Commentaire {
 	@Id
-	private String id;
+	@GeneratedValue
+	private Long id;
     String contenu;
     Date date;
 @ManyToOne

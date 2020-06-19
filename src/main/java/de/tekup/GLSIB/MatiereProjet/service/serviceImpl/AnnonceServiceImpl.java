@@ -11,6 +11,7 @@ import de.tekup.GLSIB.MatiereProjet.dao.CategorieRepository;
 import de.tekup.GLSIB.MatiereProjet.dao.SousCategorieRepository;
 import de.tekup.GLSIB.MatiereProjet.dao.UtilisateurRepository;
 import de.tekup.GLSIB.MatiereProjet.entite.Annonce;
+import de.tekup.GLSIB.MatiereProjet.entite.Commentaire;
 import de.tekup.GLSIB.MatiereProjet.entite.SousCategorie;
 import de.tekup.GLSIB.MatiereProjet.entite.Utilisateur;
 import de.tekup.GLSIB.MatiereProjet.service.AnnonceService;
@@ -58,6 +59,15 @@ public class AnnonceServiceImpl implements AnnonceService {
 	public List<Annonce> getAll() {
 		return annonceRepository.findAll() ;
 	}
-	
-
+	@Override
+	public List<Annonce> getByUserId(String id) {
+		// TODO Auto-generated method stub
+		return annonceRepository.findByUtilisateurId(id);
+	}
+@Override
+public Annonce addComment(Commentaire c, Long idAn) {
+	Annonce annonce=annonceRepository.findById(idAn).get();
+   annonce.getCommentaires().add(c) ;
+   return annonceRepository.save(annonce);
+}
 }

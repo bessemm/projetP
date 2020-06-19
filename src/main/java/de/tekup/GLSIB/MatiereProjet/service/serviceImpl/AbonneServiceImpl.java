@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import de.tekup.GLSIB.MatiereProjet.dao.AbonneRepo;
 import de.tekup.GLSIB.MatiereProjet.dao.UtilisateurRepository;
 import de.tekup.GLSIB.MatiereProjet.entite.Abonne;
 import de.tekup.GLSIB.MatiereProjet.entite.Utilisateur;
@@ -18,6 +19,8 @@ public class AbonneServiceImpl implements AbonneService {
     @Autowired
     private UtilisateurRepository userRepository;
     @Autowired
+    private AbonneRepo abonneRepo ;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
@@ -27,7 +30,7 @@ public class AbonneServiceImpl implements AbonneService {
         Utilisateur user = userRepository.findUtilisateurByUsername(username);
         if (user != null) throw new RuntimeException("L utilisateur existe déjà");
         if (!password.equals(confirmedPassword)) throw new RuntimeException(" confirmer votre mot de passe");
-        Utilisateur appUser = new Utilisateur();
+        Abonne appUser = new Abonne();
         appUser.setUsername(username);
         appUser.setEmail(email);
         appUser.setNom(firstName);
@@ -36,7 +39,7 @@ public class AbonneServiceImpl implements AbonneService {
          appUser.setImage("./assets/image/profile/default.png");
         appUser.setPassword(bCryptPasswordEncoder.encode(password));
         appUser.setRole("ABONNE");
-        userRepository.save(appUser);
+        abonneRepo.save(appUser);
         return appUser;
     }
 
@@ -44,9 +47,12 @@ public class AbonneServiceImpl implements AbonneService {
     public Utilisateur loadUserByUsername(String username) {
         return userRepository.findUtilisateurByUsername(username);
     }
-    public Abonne loadAbonneByUsername(String username) {
+    
+    
+    public Utilisateur loadAbonneByUsername(String username) {
     	System.out.println(username);
-        Abonne a= userRepository.findOneByUsername(username).get();
+        Utilisateur a=  userRepository.findOneByUsername(username).get();
+        
         System.out.println(a.getNom());
         return a;
     }
@@ -58,6 +64,28 @@ public class AbonneServiceImpl implements AbonneService {
 		return true ;
 	}
 
+	@Override
+	public Abonne findByid(Long id) {
+		// TODO Auto-generated method stub
+		return abonneRepo.findById(id).get();
+	}
+@Override
+public Abonne findByUsername(String id) {
+	// TODO Auto-generated method stub
+	  return abonneRepo.findAbonneByUsername(id);
+}
+
+@Override
+public Utilisateur findAbonneByUsername(String s) {
+ 	return userRepository.findUtilisateurByUsername(s);
+}
+
+
+@Override
+public Integer findNbAbonnee(String username) {
+	// TODO Auto-generated method stub
+	return abonneRepo.findAbonneByUsername(username).getAnnonces().size();
+}
 }
 
 

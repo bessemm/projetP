@@ -28,10 +28,11 @@ public class MatiereProjetApplication {
 
            
 			
-			/*
-			 * abonneService.inscription("admin","1234","1234","bessem","manita",
-			 * "bessem.manita@gmail.com");
-			 */userRepo.findAll().forEach(System.out::println);
+			
+			// abonneService.inscription("admin","1234","1234","bessem","manita",
+			  //"bessem.manita@gmail.com");
+			 
+			//userRepo.findAll().forEach(System.out::println);
 			  
 			 
 			 

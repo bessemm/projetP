@@ -1,20 +1,16 @@
 package de.tekup.GLSIB.MatiereProjet.entite;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue( value="admin" )
+@PrimaryKeyJoinColumn(referencedColumnName = "id")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+ 
 public class Admin extends Utilisateur {
-     private Date dateAdmin;
-     
-}
+      
+	 }
